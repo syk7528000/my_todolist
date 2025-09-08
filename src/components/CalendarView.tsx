@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
-import { Todo } from './types';
+import { Todo, Priority } from './types';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
 import './CalendarView.css'; // 방금 만든 CSS 파일 임포트
@@ -11,6 +11,7 @@ interface CalendarViewProps {
   toggleTodo: (id: number) => void;
   deleteTodo: (id: number) => void;
   editTodo: (id: number, newText: string) => void;
+  changeTodoPriority: (id: number, priority: Priority) => void;
   addSubTodo: (parentId: number, text: string) => void;
   // 하위 항목 제어 함수 props 추가
   toggleSubTodo: (parentId: number, subTodoId: number) => void;
@@ -26,6 +27,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({
   toggleTodo, 
   deleteTodo, 
   editTodo, 
+  changeTodoPriority,
   addSubTodo,
   // props 비구조화 할당에 추가
   toggleSubTodo,
@@ -89,7 +91,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({
           <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">{selectedDate.toLocaleDateString()}</h2>
-              <button onClick={() => setIsModalOpen(false)} className="text-2xl font-bold">&times;</button>
+              <button type="button" onClick={() => setIsModalOpen(false)} className="text-2xl font-bold">&times;</button>
             </div>
             <p className="mb-4 text-gray-600">할 일 목록</p>
             <div className="mt-4 max-h-80 overflow-y-auto">
@@ -98,12 +100,17 @@ const CalendarView: React.FC<CalendarViewProps> = ({
                 toggleTodo={toggleTodo}
                 deleteTodo={deleteTodo}
                 editTodo={editTodo}
+                changeTodoPriority={changeTodoPriority}
                 addSubTodo={addSubTodo}
                 // 누락된 props를 TodoList에 전달
                 toggleSubTodo={toggleSubTodo}
                 deleteSubTodo={deleteSubTodo}
                 editSubTodo={editSubTodo}
               />
+              <div className="mt-4 pt-4 border-t">
+                {/* 모달 내부에 할 일 추가 폼 추가 */}
+                <AddTodoForm addTodo={(text) => addTodo(text, selectedDateString)} />
+              </div>
             </div>
           </div>
         </div>
