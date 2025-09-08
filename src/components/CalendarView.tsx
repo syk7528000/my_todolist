@@ -11,15 +11,31 @@ interface CalendarViewProps {
   toggleTodo: (id: number) => void;
   deleteTodo: (id: number) => void;
   editTodo: (id: number, newText: string) => void;
+  addSubTodo: (parentId: number, text: string) => void;
+  // 하위 항목 제어 함수 props 추가
+  toggleSubTodo: (parentId: number, subTodoId: number) => void;
+  deleteSubTodo: (parentId: number, subTodoId: number) => void;
+  editSubTodo: (parentId: number, subTodoId: number, newText: string) => void;
 }
-
 // 날짜를 'YYYY-MM-DD' 형식의 문자열로 변환하는 함수
 const toDateString = (date: Date) => date.toISOString().split('T')[0];
 
-const CalendarView: React.FC<CalendarViewProps> = ({ todos, addTodo, toggleTodo, deleteTodo, editTodo }) => {
+const CalendarView: React.FC<CalendarViewProps> = ({ 
+  todos, 
+  addTodo, 
+  toggleTodo, 
+  deleteTodo, 
+  editTodo, 
+  addSubTodo,
+  // props 비구조화 할당에 추가
+  toggleSubTodo,
+  deleteSubTodo,
+  editSubTodo
+}) => {
   const [currentDate, setCurrentDate] = useState<Date | null>(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
 
   // 날짜 클릭 핸들러: 모달을 열고 선택된 날짜를 설정
   const handleDateClick = (date: Date) => {
@@ -76,17 +92,22 @@ const CalendarView: React.FC<CalendarViewProps> = ({ todos, addTodo, toggleTodo,
               <button onClick={() => setIsModalOpen(false)} className="text-2xl font-bold">&times;</button>
             </div>
             <p className="mb-4 text-gray-600">할 일 목록</p>
-            <AddTodoForm addTodo={(text) => addTodo(text, selectedDateString)} />
             <div className="mt-4 max-h-80 overflow-y-auto">
               <TodoList
                 todos={todosForSelectedDate}
                 toggleTodo={toggleTodo}
                 deleteTodo={deleteTodo}
                 editTodo={editTodo}
+                addSubTodo={addSubTodo}
+                // 누락된 props를 TodoList에 전달
+                toggleSubTodo={toggleSubTodo}
+                deleteSubTodo={deleteSubTodo}
+                editSubTodo={editSubTodo}
               />
             </div>
           </div>
         </div>
+      
       )}
     </div>
   );

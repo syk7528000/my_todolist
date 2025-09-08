@@ -55,7 +55,7 @@
   background: none;
   border: none;
   /* 모든 타일에 위쪽 테두리를 추가 */
-  border-top: 1px solid #f3f4f6; 
+  border-top: 1px solid rgb(167, 167, 167); 
 }
 
 /* 각 주의 첫 번째 날짜 타일을 제외하고 왼쪽에 테두리를 추가하여 세로선을 만듭니다. */
