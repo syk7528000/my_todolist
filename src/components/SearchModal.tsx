@@ -41,8 +41,8 @@ const SearchModal: React.FC<SearchModalProps> = (props) => {
   return (
     <div className="fixed inset-0 bg-black/60 flex justify-center items-start pt-20 z-50 backdrop-blur-sm" onClick={onClose}>
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-2xl" onClick={(e) => e.stopPropagation()}>
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">할 일 검색</h2>
+        <div className="flex justify-between items-center mb-4 pb-4 border-b border-slate-200">
+          <h2 className="text-xl font-semibold text-slate-800">할 일 검색</h2>
           <button type="button" onClick={onClose} className="text-slate-500 hover:text-slate-800 p-1 rounded-full"><X size={28} /></button>
         </div>
         <div className="relative mb-4">

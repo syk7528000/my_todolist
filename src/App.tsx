@@ -192,8 +192,8 @@ function App() {
         ) : (
           // 메인 콘텐츠 영역
           <div className="max-w-4xl mx-auto">
-            <div className="flex justify-between items-center mb-4">
-              <h1 className="text-4xl font-bold text-slate-800">{currentView}</h1>
+            <div className="flex justify-between items-center mt-10 mb-10">
+              <h1 className="text-2xl font-bold text-slate-800 ">{currentView}</h1>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-medium text-slate-500">우선순위:</span>
                 {(['높음', '중간', '낮음'] as Priority[]).map(p => (
@@ -273,6 +273,7 @@ function App() {
         <ProjectModal
           project={inboxProjectModal}
           todos={todos}
+          deleteProject={deleteProject}
           onClose={() => setInboxProjectModal(null)}
           toggleTodo={toggleTodo}
           deleteTodo={deleteTodo}

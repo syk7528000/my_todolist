@@ -89,11 +89,11 @@ const CalendarView: React.FC<CalendarViewProps> = ({
       {isModalOpen && selectedDate && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">{selectedDate.toLocaleDateString()}</h2>
-              <button type="button" onClick={() => setIsModalOpen(false)} className="text-2xl font-bold">&times;</button>
+            <div className="flex justify-between items-center mb-4 pb-4 border-b border-slate-200">
+              <h2 className="text-xl font-semibold text-slate-800">{selectedDate.toLocaleDateString()}</h2>
+              <button type="button" onClick={() => setIsModalOpen(false)} className="text-2xl text-slate-400 hover:text-slate-600">&times;</button>
             </div>
-            <p className="mb-4 text-gray-600">할 일 목록</p>
+            <p className="mb-2 text-sm font-semibold text-slate-600">할 일 목록</p>
             <div className="mt-4 max-h-80 overflow-y-auto">
               <TodoList
                 todos={todosForSelectedDate}
